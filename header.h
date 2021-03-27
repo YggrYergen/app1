@@ -31,6 +31,6 @@ typedef struct libros {
 
 void count_rows(int *a, FILE *input);
 void leer_csv(FILE *fp, libros values[]);
-void printvalues(libros values[], int numb_rows);
+///void printvalues(libros values[], int numb_rows);
 
 #endif
