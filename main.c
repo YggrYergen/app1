@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
   leer_csv(fp, values);
   fclose(fp);
 
-  printvalues(values, numb_rows);
+  //printvalues(values, numb_rows);
 
   return 0;
 }
