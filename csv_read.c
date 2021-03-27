@@ -84,7 +84,7 @@ void leer_csv(FILE *fp, libros values[]) {
   }
 }
 
-void printvalues(libros values[], int numb_rows) {
+/*void printvalues(libros values[], int numb_rows) {
   for (int i = 0; i < numb_rows; i++) {
     printf(
         "titulo: %s, autor: %s, anio: %s, Estante_Numero: %s, Estante_seccion: "
@@ -92,5 +92,5 @@ void printvalues(libros values[], int numb_rows) {
         values[i].titulo, values[i].autor, values[i].anio,
         values[i].estante.estante_numero, values[i].estante.estante_seccion,
         values[i].estante.piso, values[i].sede.edificio, values[i].sede.sede);
-  }
+  }*/
 }
