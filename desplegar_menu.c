@@ -22,20 +22,52 @@ int main(){
                 p("Seleccionó [1]: Añadir o quitar libro, por favor selecciona:\n\n");
                 p("[1]   Añadir libro\n");
                 p("[2]   Quitar libro\n");
+                p("[3]   Atrás\n")
                 p("Opción: ");
                 s("%d",&opcion2);
                 p("\n");
                 
                 switch(opcion2) { // Opciones en añadir o quitar libro
-                    case 1: {
-                        p("Añadición de libro en proceso\n\n");
+                    case 1: { // Opción añadir libro
+                        libros nuevo_libro;
+                    
+                        p("\nPor favor, ingrese el nombre del libro que desea añadir: \n");
+                        s("%s", nuevo_libro.titulo);
+
+                        p("\nPor favor, ingrese el autor del libro que desea añadir: \n");
+                        s("%s", nuevo_libro.autor);
+
+                        p("\nPor favor, ingrese el año de publicación del libro que desea añadir: \n");
+                        s("%s", nuevo_libro.anio);
+
+                        p("\nPor favor, indique en qué sede desea guardarlo: \n");
+                        s("%s", nuevo_libro.info_sede.sede);
+
+                        p("\nPor favor, indique en qué edificio de la sede %s desea guardarlo: \n", nuevo_libro.info_sede.sede);
+                        s("%s", nuevo_libro.info_sede.edificio);
+
+                        p("\nPor favor, indique en qué piso del edificio %s desea guardarlo: \n");
+                        s("%s", nuevo_libro.info_sede.piso);
+
+                        p("\nPor favor, indique en qué sección guardarlo\n");
+                        s("%s",nuevo_libro.info_estante.estante_seccion);
+
+                        p("\nPor favor, indique en qué número de estante guardarlo\n");
+                        s("%s",nuevo_libro.info_estante.estante_numero);
+
+                        // FALTA: Asignar nuevo libro a la biblioteca local !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         break;
-                    }
-                    case 2: {
-                        p("Quitación de libro en proceso\n\n");
+                    } // case 1, cierre: opción añadir libro
+
+
+                    case 2: { // opción quitar libro
+                        char nombre_buscado;
+                        p("\nPor favor, indique el nombre del libro que desea quitar\n");
+                        s("%s",nombre_buscado);
+                        // FALTA: Buscar el libro en la bilbiotéca local y eliminarlo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
                         break;
-                    }
-                    break;
+                    } // case 2, cierre: opción quitar libro
                 } // switch, cierre: Opciones en añadir o quitar libro
             } break; // case 1, cierre: Añadir/Quitar libro
 

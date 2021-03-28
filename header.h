@@ -11,21 +11,20 @@
 typedef struct sedes {
   char sede[50];
   char edificio[5];
+  char piso[5];
 
 } sedes;
 typedef struct estantes {
   char estante_numero[5];
   char estante_seccion[50];
-  char piso[5];
-
 } estantes;
 
 typedef struct libros {
   char titulo[200];
   char autor[200];
   char anio[5];
-  estantes estante;
-  sedes sede;
+  estantes info_estante;
+  sedes info_sede;
 
 } libros;
 
