@@ -1,6 +1,6 @@
 #include "header.h"
 
-int main(){
+void desplegar_menu(libros bilbioteca[], int numb_rows){
     int opcion = 0, opcion2 = 0, salir = 0;
 
     do {
@@ -27,6 +27,7 @@ int main(){
                 s("%d",&opcion2);
                 p("\n");
                 
+
                 switch(opcion2) { // Opciones en añadir o quitar libro
                     case 1: { // Opción añadir libro
                         libros nuevo_libro;
@@ -46,7 +47,7 @@ int main(){
                         p("\nPor favor, indique en qué edificio de la sede %s desea guardarlo: \n", nuevo_libro.info_sede.sede);
                         s("%s", nuevo_libro.info_sede.edificio);
 
-                        p("\nPor favor, indique en qué piso del edificio %s desea guardarlo: \n");
+                        p("\nPor favor, indique en qué piso del edificio %s desea guardarlo: \n", nuevo_libro.info_sede.edificio);
                         s("%s", nuevo_libro.info_sede.piso);
 
                         p("\nPor favor, indique en qué sección guardarlo\n");
@@ -54,6 +55,8 @@ int main(){
 
                         p("\nPor favor, indique en qué número de estante guardarlo\n");
                         s("%s",nuevo_libro.info_estante.estante_numero);
+
+                        p("\n\n Libro guardaro exitosamente!\n\n");
 
                         // FALTA: Asignar nuevo libro a la biblioteca local !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         break;
@@ -160,7 +163,12 @@ int main(){
                 p("Seleccionó [7]: Salir y guardar, adiós.\n");
                 salir = 1;
             } break; // case 7, cierre: Salir y guardar
+
+            case 8: {
+                for(int i = 0; i < numb_rows; i++){
+                    p("%s\n",bilbioteca[i].titulo);
+                }
+            }
         }
     } while (salir == 0);
-    return 0;
 }

@@ -29,7 +29,8 @@ typedef struct libros {
 } libros;
 
 void count_rows(int *a, FILE *input);
-void leer_csv(FILE *fp, libros values[]);
-///void printvalues(libros values[], int numb_rows);
+void leer_csv(FILE *fp, libros bilbioteca[]);
+//void printvalues(libros bilbioteca[], int numb_rows); DEBUG
+void desplegar_menu(libros bilbioteca[], int numb_rows);
 
 #endif

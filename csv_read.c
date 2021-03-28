@@ -17,7 +17,7 @@ void count_rows(int *a, FILE *input) {
   }
 }
 
-void leer_csv(FILE *fp, libros values[]) {
+void leer_csv(FILE *fp, libros bilbioteca[]) {
   int i, row_count = 0, field_count = 0;
   char buff[BUFFER];
 
@@ -35,45 +35,45 @@ void leer_csv(FILE *fp, libros values[]) {
     while (field)  // field!=NULL+
     {
       if (field_count == 0) {
-        strcpy(values[i].titulo, field);
+        strcpy(bilbioteca[i].titulo, field);
         basura = strtok(NULL, "\"");
         field = strtok(NULL, "\"");
       }
 
       if (field_count == 1) {
-        strcpy(values[i].autor, field);
+        strcpy(bilbioteca[i].autor, field);
         field = strtok(NULL, ",");
       }
 
       if (field_count == 2) {
-        strcpy(values[i].anio, field);
+        strcpy(bilbioteca[i].anio, field);
         field = strtok(NULL, ",");
       }
 
       if (field_count == 3) {
-        strcpy(values[i].info_estante.estante_numero, field);
+        strcpy(bilbioteca[i].info_estante.estante_numero, field);
         field = strtok(NULL, "\"");
         ;
       }
 
       if (field_count == 4) {
-        strcpy(values[i].info_estante.estante_seccion, field);
+        strcpy(bilbioteca[i].info_estante.estante_seccion, field);
         field = strtok(NULL, ",");
       }
 
       if (field_count == 5) {
-        strcpy(values[i].info_sede.piso, field);
+        strcpy(bilbioteca[i].info_sede.piso, field);
         field = strtok(NULL, "\"");
       }
 
       if (field_count == 6) {
-        strcpy(values[i].info_sede.edificio, field);
+        strcpy(bilbioteca[i].info_sede.edificio, field);
         basura = strtok(NULL, "\"");
         field = strtok(NULL, "\"");
       }
 
       if (field_count == 7) {
-        strcpy(values[i].info_sede.sede, field);
+        strcpy(bilbioteca[i].info_sede.sede, field);
         basura = strtok(NULL, "\0");
         ;
         break;
@@ -84,13 +84,15 @@ void leer_csv(FILE *fp, libros values[]) {
   }
 }
 
-/*void printvalues(libros values[], int numb_rows) {
+/* DEBUG
+void printvalues(libros bilbioteca[], int numb_rows) {
   for (int i = 0; i < numb_rows; i++) {
-    printf(
+    printf( 
         "titulo: %s, autor: %s, anio: %s, Estante_Numero: %s, Estante_seccion: "
         "%s, piso: %s\n, edificio: %s, sede: %s\n",
-        values[i].titulo, values[i].autor, values[i].anio,
-        values[i].estante.estante_numero, values[i].estante.estante_seccion,
-        values[i].estante.piso, values[i].sede.edificio, values[i].sede.sede);
+        bilbioteca[i].titulo, bilbioteca[i].autor, bilbioteca[i].anio,
+        bilbioteca[i].info_estante.estante_numero, bilbioteca[i].info_estante.estante_seccion,
+        bilbioteca[i].info_sede.piso, bilbioteca[i].info_sede.edificio, bilbioteca[i].info_sede.sede);
   }
-} */
+} 
+*/
