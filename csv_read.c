@@ -51,29 +51,29 @@ void leer_csv(FILE *fp, libros values[]) {
       }
 
       if (field_count == 3) {
-        strcpy(values[i].estante.estante_numero, field);
+        strcpy(values[i].info_estante.estante_numero, field);
         field = strtok(NULL, "\"");
         ;
       }
 
       if (field_count == 4) {
-        strcpy(values[i].estante.estante_seccion, field);
+        strcpy(values[i].info_estante.estante_seccion, field);
         field = strtok(NULL, ",");
       }
 
       if (field_count == 5) {
-        strcpy(values[i].estante.piso, field);
+        strcpy(values[i].info_sede.piso, field);
         field = strtok(NULL, "\"");
       }
 
       if (field_count == 6) {
-        strcpy(values[i].sede.edificio, field);
+        strcpy(values[i].info_sede.edificio, field);
         basura = strtok(NULL, "\"");
         field = strtok(NULL, "\"");
       }
 
       if (field_count == 7) {
-        strcpy(values[i].sede.sede, field);
+        strcpy(values[i].info_sede.sede, field);
         basura = strtok(NULL, "\0");
         ;
         break;
@@ -92,5 +92,5 @@ void leer_csv(FILE *fp, libros values[]) {
         values[i].titulo, values[i].autor, values[i].anio,
         values[i].estante.estante_numero, values[i].estante.estante_seccion,
         values[i].estante.piso, values[i].sede.edificio, values[i].sede.sede);
-  }*/
-}
+  }
+} */
