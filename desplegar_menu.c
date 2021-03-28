@@ -22,7 +22,7 @@ int main(){
                 p("Seleccionó [1]: Añadir o quitar libro, por favor selecciona:\n\n");
                 p("[1]   Añadir libro\n");
                 p("[2]   Quitar libro\n");
-                p("[3]   Atrás\n")
+                p("[3]   Atrás\n");
                 p("Opción: ");
                 s("%d",&opcion2);
                 p("\n");
