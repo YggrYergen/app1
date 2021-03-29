@@ -17,7 +17,7 @@ void count_rows(int *a, FILE *input) {
   }
 }
 
-void leer_csv(FILE *fp, libros values[]) {
+void leer_csv(FILE *fp, libros biblioteca[]) {
   int i, row_count = 0, field_count = 0;
   char buff[BUFFER];
 
@@ -35,45 +35,45 @@ void leer_csv(FILE *fp, libros values[]) {
     while (field)  // field!=NULL+
     {
       if (field_count == 0) {
-        strcpy(values[i].titulo, field);
+        strcpy(biblioteca[i].titulo, field);
         basura = strtok(NULL, "\"");
         field = strtok(NULL, "\"");
       }
 
       if (field_count == 1) {
-        strcpy(values[i].autor, field);
+        strcpy(biblioteca[i].autor, field);
         field = strtok(NULL, ",");
       }
 
       if (field_count == 2) {
-        strcpy(values[i].anio, field);
+        strcpy(biblioteca[i].anio, field);
         field = strtok(NULL, ",");
       }
 
       if (field_count == 3) {
-        strcpy(values[i].estante.estante_numero, field);
+        strcpy(biblioteca[i].info_estante.estante_numero, field);
         field = strtok(NULL, "\"");
         ;
       }
 
       if (field_count == 4) {
-        strcpy(values[i].estante.estante_seccion, field);
+        strcpy(biblioteca[i].info_estante.estante_seccion, field);
         field = strtok(NULL, ",");
       }
 
       if (field_count == 5) {
-        strcpy(values[i].estante.piso, field);
+        strcpy(biblioteca[i].info_sede.piso, field);
         field = strtok(NULL, "\"");
       }
 
       if (field_count == 6) {
-        strcpy(values[i].sede.edificio, field);
+        strcpy(biblioteca[i].info_sede.edificio, field);
         basura = strtok(NULL, "\"");
         field = strtok(NULL, "\"");
       }
 
       if (field_count == 7) {
-        strcpy(values[i].sede.sede, field);
+        strcpy(biblioteca[i].info_sede.sede, field);
         basura = strtok(NULL, "\0");
         ;
         break;
@@ -84,13 +84,16 @@ void leer_csv(FILE *fp, libros values[]) {
   }
 }
 
-void printvalues(libros values[], int numb_rows) {
+/* DEBUG
+void printvalues(libros biblioteca[], int numb_rows) {
   for (int i = 0; i < numb_rows; i++) {
     printf(
         "titulo: %s, autor: %s, anio: %s, Estante_Numero: %s, Estante_seccion: "
         "%s, piso: %s\n, edificio: %s, sede: %s\n",
-        values[i].titulo, values[i].autor, values[i].anio,
-        values[i].estante.estante_numero, values[i].estante.estante_seccion,
-        values[i].estante.piso, values[i].sede.edificio, values[i].sede.sede);
+        biblioteca[i].titulo, biblioteca[i].autor, biblioteca[i].anio,
+        biblioteca[i].info_estante.estante_numero,
+biblioteca[i].info_estante.estante_seccion, biblioteca[i].info_sede.piso,
+biblioteca[i].info_sede.edificio, biblioteca[i].info_sede.sede);
   }
 }
+*/

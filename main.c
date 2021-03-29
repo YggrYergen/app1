@@ -10,15 +10,19 @@ int main(int argc, char** argv) {
     printf("Error\n");
     return 0;
   }
+
   count_rows(&numb_rows, nr);
   fclose(nr);
 
-  libros values[numb_rows];
+  libros biblioteca[numb_rows];
 
-  leer_csv(fp, values);
+  leer_csv(fp, biblioteca);
+
   fclose(fp);
 
-  printvalues(values, numb_rows);
+  show_menu(biblioteca, numb_rows);
+
+  // printbiblioteca(biblioteca, numb_rows); DEBUG
 
   return 0;
 }
