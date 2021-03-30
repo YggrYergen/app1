@@ -7,30 +7,31 @@ void show_menu(libros biblioteca[], int numb_rows) {
     int subopcion;
     int salir = 0;
 
-    printf("\n¡Bienvenido a la biblioteca UAI!\n");
-    printf("Selecciona una opción: \n");
-    printf("[1]   Añadir/Quitar un libro.\n");
-    printf("[2]   Añadir/Quitar una sede.\n");
-    printf("[3]   Añadir/Quitar un piso.\n");
-    printf("[4]   Añadir/Quitar una sección.\n");
-    printf("[5]   Editar libro.\n");
-    printf("[6]   Buscar libro.\n");
-    printf("[7]   Salir y guardar cambios.\n");
-    printf("[8]   Salir del sistema.\n");
-    printf("Opcion: ");
-    scanf("%d", &opcion);
-    printf("\n");
+    p("\n¡Bienvenido a la biblioteca UAI!\n");
+    p("Selecciona una opción: \n");
+    p("[1]   Añadir/Quitar un libro.\n");
+    p("[2]   Añadir/Quitar una sede.\n");
+    p("[3]   Añadir/Quitar un piso.\n");
+    p("[4]   Añadir/Quitar una sección.\n");
+    p("[5]   Editar libro.\n");
+    p("[6]   Buscar libro.\n");
+    p("[7]   Salir y guardar cambios.\n");
+    p("[8]   Salir del sistema.\n");
+    p("Opcion: ");
+    s("%d", &opcion);
+    p("\n");
 
     do {
       switch (opcion) {
         case 1: {
-          printf("[Añadir o quitar un libro]\n");
-          printf("Selecciona una opción:\n");
-          printf("[1]   Añadir un libro.\n");
-          printf("[2]   Quitar un libro.\n");
-          printf("[3]   Atrás.\n");
-          scanf("%d", &subopcion);
-          printf("\n");
+          p("[Añadir o quitar un libro]\n");
+          p("Selecciona una opción:\n");
+          p("[1]   Añadir un libro.\n");
+          p("[2]   Quitar un libro.\n");
+          p("[3]   Atrás.\n");
+          p("Opcion: ");
+          s("%d", &subopcion);
+          p("\n");
           switch (subopcion) {
             case 1: {
               // AñadirLibro()
@@ -39,20 +40,21 @@ void show_menu(libros biblioteca[], int numb_rows) {
               // QuitarLibro()
             } break;
             case 3: {
-              printf("Volviendo al menú principal...\n");
+              p("Volviendo al menú principal...\n");
               salir = 1;
             } break;
           }
         } break;
 
         case 2: {
-          printf("[Añadir o quitar una sede]\n");
-          printf("Selecciona una opción:\n");
-          printf("[1]   Añadir una sede.\n");
-          printf("[2]   Quitar una sede.\n");
-          printf("[3]   Atrás.\n");
-          scanf("%d", &subopcion);
-          printf("\n");
+          p("[Añadir o quitar una sede]\n");
+          p("Selecciona una opción:\n");
+          p("[1]   Añadir una sede.\n");
+          p("[2]   Quitar una sede.\n");
+          p("[3]   Atrás.\n");
+          p("Opcion: ");
+          s("%d", &subopcion);
+          p("\n");
           switch (subopcion) {
             case 1: {
               // AñadirSede()
@@ -61,20 +63,21 @@ void show_menu(libros biblioteca[], int numb_rows) {
               // QuitarSede()
             } break;
             case 3: {
-              printf("Volviendo al menú principal...\n");
+              p("Volviendo al menú principal...\n");
               salir = 1;
             } break;
           }
         } break;
 
         case 3: {
-          printf("[Añadir o quitar un piso]\n");
-          printf("Selecciona una opción:\n");
-          printf("[1]   Añadir un piso.\n");
-          printf("[2]   Quitar un piso.\n");
-          printf("[3]   Atrás.\n");
-          scanf("%d", &subopcion);
-          printf("\n");
+          p("[Añadir o quitar un piso]\n");
+          p("Selecciona una opción:\n");
+          p("[1]   Añadir un piso.\n");
+          p("[2]   Quitar un piso.\n");
+          p("[3]   Atrás.\n");
+          p("Opcion: ");
+          s("%d", &subopcion);
+          p("\n");
           switch (subopcion) {
             case 1: {
               // AñadirPiso()
@@ -83,20 +86,21 @@ void show_menu(libros biblioteca[], int numb_rows) {
               // QuitarPiso()
             } break;
             case 3: {
-              printf("Volviendo al menú principal...\n");
+              p("Volviendo al menú principal...\n");
               salir = 1;
             } break;
           }
         } break;
 
         case 4: {
-          printf("[Añadir o quitar una sección]\n");
-          printf("Selecciona una opción:\n");
-          printf("[1]   Añadir una sección.\n");
-          printf("[2]   Quitar una sección.\n");
-          printf("[3]   Atrás.\n");
-          scanf("%d", &subopcion);
-          printf("\n");
+          p("[Añadir o quitar una sección]\n");
+          p("Selecciona una opción:\n");
+          p("[1]   Añadir una sección.\n");
+          p("[2]   Quitar una sección.\n");
+          p("[3]   Atrás.\n");
+          p("Opcion: ");
+          s("%d", &subopcion);
+          p("\n");
           switch (subopcion) {
             case 1: {
               // AñadirSec()
@@ -105,22 +109,23 @@ void show_menu(libros biblioteca[], int numb_rows) {
               // QuitarSec()
             } break;
             case 3: {
-              printf("Volviendo al menú principal...\n");
+              p("Volviendo al menú principal...\n");
               salir = 1;
             } break;
           }
         } break;
 
         case 5: {
-          printf("[Editar un libro]\n");
-          printf("Selecciona una opción:\n");
-          printf("[1]   Editar información del libro.\n");
-          printf("[2]   Editar sede del libro.\n");
-          printf("[3]   Editar piso del libro.\n");
-          printf("[4]   Editar sección del libro.\n");
-          printf("[5]   Atrás.\n");
-          scanf("%d", &subopcion);
-          printf("\n");
+          p("[Editar un libro]\n");
+          p("Selecciona una opción:\n");
+          p("[1]   Editar información del libro.\n");
+          p("[2]   Editar sede del libro.\n");
+          p("[3]   Editar piso del libro.\n");
+          p("[4]   Editar sección del libro.\n");
+          p("[5]   Atrás.\n");
+          p("Opcion: ");
+          s("%d", &subopcion);
+          p("\n");
           switch (subopcion) {
             case 1: {
               // OTRO SUBMENÚ // EDITARLIBRO
@@ -135,26 +140,25 @@ void show_menu(libros biblioteca[], int numb_rows) {
               // CambiarSec()
             } break;
             case 5: {
-              printf("Volviendo al menú principal...\n");
+              p("Volviendo al menú principal...\n");
               salir = 1;
             } break;
           }
         } break;
 
         case 6: {
-          // BuscarLibro()
-          printf("\n");
-          printf("[1]   Volver al menú principal.\n");
-          printf("[2]   Salir del sistema.\n");
-          scanf("%d", &subopcion);
-          printf("\n");
+          BuscarLibro(biblioteca, numb_rows);
+          p("\n[1]   Volver al menú principal.\n");
+          p("[2]   Salir del sistema.\n");
+          p("Opcion: ");
+          s("%d", &subopcion);
+          p("\n");
           if (subopcion == 1) {
-            printf("Volviendo al menú principal...\n");
-            cerrar = 1;
+            p("Volviendo al menú principal...\n");
             salir = 1;
           }
           if (subopcion == 2) {
-            printf("Saliendo del sistema...\n");
+            p("Saliendo del sistema...\n");
             salir = 1;
             cerrar = 1;
           }
@@ -164,15 +168,15 @@ void show_menu(libros biblioteca[], int numb_rows) {
         } break;
 
         case 7: {
-          printf("Guardando...\n");
+          p("Guardando...\n");
           // GuardarCambios()
-          printf("Saliendo del sistema...\n");
+          p("Saliendo del sistema...\n");
           salir = 1;
           cerrar = 1;
         } break;
 
         case 8: {
-          printf("Saliendo del sistema...\n");
+          p("Saliendo del sistema...\n");
           salir = 1;
           cerrar = 1;
         }

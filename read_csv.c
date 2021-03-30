@@ -1,7 +1,7 @@
 #include "header.h"
 
 void count_rows(int *a, FILE *input) {
-  int row_count = 0;
+    int row_count = 0;
   char buff[BUFFER];
   while (fgets(buff, 1024, input)) {
     row_count++;

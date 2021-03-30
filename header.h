@@ -32,5 +32,6 @@ void count_rows(int *a, FILE *input);
 void leer_csv(FILE *fp, libros biblioteca[]);
 // void printvalues(libros bilbioteca[], int numb_rows); DEBUG
 void show_menu(libros biblioteca[], int numb_rows);
+void BuscarLibro(libros biblioteca[], int numb_rows);
 
 #endif
