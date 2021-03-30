@@ -1,18 +1,12 @@
 #include "header.h"
 
 void count_rows(int *a, FILE *input) {
-    int row_count = 0;
+  int row_count = 0;
   char buff[BUFFER];
   while (fgets(buff, 1024, input)) {
     row_count++;
     if (row_count == 1)
       continue;  // esto es para no contar la primera fila de "etiquetas"
-
-    char *field = strtok(buff, ",");  // separa buff por comas
-    while (field)                     // field!=NULL
-    {
-      field = strtok(NULL, ",");
-    }
     *a = row_count - 1;
   }
 }
@@ -84,7 +78,7 @@ void leer_csv(FILE *fp, libros biblioteca[]) {
   }
 }
 
-/* DEBUG
+/*
 void printvalues(libros biblioteca[], int numb_rows) {
   for (int i = 0; i < numb_rows; i++) {
     printf(
@@ -92,8 +86,9 @@ void printvalues(libros biblioteca[], int numb_rows) {
         "%s, piso: %s\n, edificio: %s, sede: %s\n",
         biblioteca[i].titulo, biblioteca[i].autor, biblioteca[i].anio,
         biblioteca[i].info_estante.estante_numero,
-biblioteca[i].info_estante.estante_seccion, biblioteca[i].info_sede.piso,
-biblioteca[i].info_sede.edificio, biblioteca[i].info_sede.sede);
+        biblioteca[i].info_estante.estante_seccion,
+        biblioteca[i].info_sede.piso, biblioteca[i].info_sede.edificio,
+        biblioteca[i].info_sede.sede);
   }
 }
 */

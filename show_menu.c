@@ -15,8 +15,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
     p("[4]   Añadir/Quitar una sección.\n");
     p("[5]   Editar libro.\n");
     p("[6]   Buscar libro.\n");
-    p("[7]   Salir y guardar cambios.\n");
-    p("[8]   Salir del sistema.\n");
+    p("[7]   Salir del sistema.\n");
     p("Opcion: ");
     s("%d", &opcion);
     p("\n");
@@ -24,6 +23,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
     do {
       switch (opcion) {
         case 1: {
+          p("\e[1;1H\e[2J");
           p("[Añadir o quitar un libro]\n");
           p("Selecciona una opción:\n");
           p("[1]   Añadir un libro.\n");
@@ -40,6 +40,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
               // QuitarLibro()
             } break;
             case 3: {
+              p("\e[1;1H\e[2J");
               p("Volviendo al menú principal...\n");
               salir = 1;
             } break;
@@ -47,6 +48,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
         } break;
 
         case 2: {
+          p("\e[1;1H\e[2J");
           p("[Añadir o quitar una sede]\n");
           p("Selecciona una opción:\n");
           p("[1]   Añadir una sede.\n");
@@ -63,6 +65,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
               // QuitarSede()
             } break;
             case 3: {
+              p("\e[1;1H\e[2J");
               p("Volviendo al menú principal...\n");
               salir = 1;
             } break;
@@ -70,6 +73,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
         } break;
 
         case 3: {
+          p("\e[1;1H\e[2J");
           p("[Añadir o quitar un piso]\n");
           p("Selecciona una opción:\n");
           p("[1]   Añadir un piso.\n");
@@ -86,6 +90,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
               // QuitarPiso()
             } break;
             case 3: {
+              p("\e[1;1H\e[2J");
               p("Volviendo al menú principal...\n");
               salir = 1;
             } break;
@@ -93,6 +98,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
         } break;
 
         case 4: {
+          p("\e[1;1H\e[2J");
           p("[Añadir o quitar una sección]\n");
           p("Selecciona una opción:\n");
           p("[1]   Añadir una sección.\n");
@@ -109,6 +115,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
               // QuitarSec()
             } break;
             case 3: {
+              p("\e[1;1H\e[2J");
               p("Volviendo al menú principal...\n");
               salir = 1;
             } break;
@@ -116,6 +123,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
         } break;
 
         case 5: {
+          p("\e[1;1H\e[2J");
           p("[Editar un libro]\n");
           p("Selecciona una opción:\n");
           p("[1]   Editar información del libro.\n");
@@ -140,6 +148,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
               // CambiarSec()
             } break;
             case 5: {
+              p("\e[1;1H\e[2J");
               p("Volviendo al menú principal...\n");
               salir = 1;
             } break;
@@ -147,6 +156,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
         } break;
 
         case 6: {
+          p("\e[1;1H\e[2J");
           BuscarLibro(biblioteca, numb_rows);
           p("\n[1]   Volver al menú principal.\n");
           p("[2]   Salir del sistema.\n");
@@ -154,10 +164,12 @@ void show_menu(libros biblioteca[], int numb_rows) {
           s("%d", &subopcion);
           p("\n");
           if (subopcion == 1) {
+            p("\e[1;1H\e[2J");
             p("Volviendo al menú principal...\n");
             salir = 1;
           }
           if (subopcion == 2) {
+            p("\e[1;1H\e[2J");
             p("Saliendo del sistema...\n");
             salir = 1;
             cerrar = 1;
@@ -168,18 +180,13 @@ void show_menu(libros biblioteca[], int numb_rows) {
         } break;
 
         case 7: {
+          p("\e[1;1H\e[2J");
           p("Guardando...\n");
           // GuardarCambios()
           p("Saliendo del sistema...\n");
           salir = 1;
           cerrar = 1;
         } break;
-
-        case 8: {
-          p("Saliendo del sistema...\n");
-          salir = 1;
-          cerrar = 1;
-        }
       }
     } while (salir == 0);
   }

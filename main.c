@@ -7,7 +7,7 @@ int main(int argc, char** argv) {
   FILE* fp = fopen(archivo_csv, "r");
   FILE* nr = fopen(archivo_csv, "r");
   if (!fp) {  // es lo mismo que input==NULL
-    printf("Error\n");
+    printf("Error, ingrese el archico .cvs correctamente.\n");
     return 0;
   }
 
@@ -17,11 +17,12 @@ int main(int argc, char** argv) {
   libros biblioteca[numb_rows];
 
   leer_csv(fp, biblioteca);
-  fclose(fp);
 
   show_menu(biblioteca, numb_rows);
 
-  // printbiblioteca(biblioteca, numb_rows); DEBUG
+  fclose(fp);
+
+  // printvalues(biblioteca, numb_rows);
 
   return 0;
 }

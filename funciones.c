@@ -8,10 +8,10 @@ void BuscarLibro(libros biblioteca[], int numb_rows) {
   p("Ingresa el nombre del libro: ");
   s(" %[^\n]", tituloABuscar);
 
-  for (int y = 0; y < numb_rows; y++) {
-    if (strcmp(tituloABuscar, biblioteca[y].titulo) == 0) {
+  for (int i = 0; i < numb_rows; i++) {
+    if (strcmp(tituloABuscar, biblioteca[i].titulo) == 0) {
       found = 1;
-      ind = y;
+      ind = i;
     }
   }
 
