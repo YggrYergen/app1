@@ -33,7 +33,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
           printf("\n");
           switch (subopcion) {
             case 1: {
-              // AñadirLibro()
+              aniadir_libro(biblioteca, numb_rows);
             } break;
             case 2: {
               // QuitarLibro()
@@ -180,3 +180,8 @@ void show_menu(libros biblioteca[], int numb_rows) {
     } while (salir == 0);
   }
 }
+
+/* DATO (No borrar pls):
+
+Para leer una string con espacios ocupar la función: scanf("%[^\n]", variable);
+*/

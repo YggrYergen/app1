@@ -1,3 +1,7 @@
 a.out
 pruebas.c
 pruebas2.c
+editar.o
+main.o
+read_csv.o
+show_menu.o
