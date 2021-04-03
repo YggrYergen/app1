@@ -136,7 +136,27 @@ void show_menu(libros biblioteca[], int numb_rows) {
           p("\n");
           switch (subopcion) {
             case 1: {
-              // OTRO SUBMENÚ // EDITARLIBRO
+              p("\e[1;1H\e[2J");
+              EditarLibro(biblioteca, numb_rows);
+              p("\n[1]   Volver al menú principal.\n");
+              p("[2]   Salir del sistema.\n");
+              p("Opcion: ");
+              s("%d", &subopcion);
+              p("\n");
+              if (subopcion == 1) {
+                p("\e[1;1H\e[2J");
+                p("Volviendo al menú principal...\n");
+                salir = 1;
+              }
+              if (subopcion == 2) {
+                p("\e[1;1H\e[2J");
+                p("Saliendo del sistema...\n");
+                salir = 1;
+                cerrar = 1;
+              }
+              if (subopcion > 2) {
+                break;
+              }
             } break;
             case 2: {
               // CambiarSede()
