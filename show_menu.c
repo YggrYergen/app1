@@ -36,7 +36,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
               aniadir_libro(biblioteca, numb_rows);
             } break;
             case 2: {
-              // QuitarLibro()
+              QuitarLibro();
             } break;
             case 3: {
               printf("Volviendo al menú principal...\n");
@@ -55,10 +55,10 @@ void show_menu(libros biblioteca[], int numb_rows) {
           printf("\n");
           switch (subopcion) {
             case 1: {
-              // AñadirSede()
+              AniadirSede();
             } break;
             case 2: {
-              // QuitarSede()
+              QuitarSede();
             } break;
             case 3: {
               printf("Volviendo al menú principal...\n");
@@ -77,10 +77,10 @@ void show_menu(libros biblioteca[], int numb_rows) {
           printf("\n");
           switch (subopcion) {
             case 1: {
-              // AñadirPiso()
+              AniadirPiso();
             } break;
             case 2: {
-              // QuitarPiso()
+              QuitarPiso();
             } break;
             case 3: {
               printf("Volviendo al menú principal...\n");
@@ -99,10 +99,10 @@ void show_menu(libros biblioteca[], int numb_rows) {
           printf("\n");
           switch (subopcion) {
             case 1: {
-              // AñadirSec()
+              AniadirSec();
             } break;
             case 2: {
-              // QuitarSec()
+              QuitarSec();
             } break;
             case 3: {
               printf("Volviendo al menú principal...\n");
@@ -126,13 +126,13 @@ void show_menu(libros biblioteca[], int numb_rows) {
               // OTRO SUBMENÚ // EDITARLIBRO
             } break;
             case 2: {
-              // CambiarSede()
+              // CambiarSede(nombre_objetivo, nueva_sede);
             } break;
             case 3: {
-              // CambiarPiso()
+              // CambiarPiso(nombre_objetivo, nuevo_piso);
             } break;
             case 4: {
-              // CambiarSec()
+              // CambiarSec(nombre objetivo, nueva_seccion);
             } break;
             case 5: {
               printf("Volviendo al menú principal...\n");
@@ -142,33 +142,11 @@ void show_menu(libros biblioteca[], int numb_rows) {
         } break;
 
         case 6: {
-          // BuscarLibro()
-          printf("\n");
-          printf("[1]   Volver al menú principal.\n");
-          printf("[2]   Salir del sistema.\n");
-          scanf("%d", &subopcion);
-          printf("\n");
-          if (subopcion == 1) {
-            printf("Volviendo al menú principal...\n");
-            cerrar = 1;
-            salir = 1;
-          }
-          if (subopcion == 2) {
-            printf("Saliendo del sistema...\n");
-            salir = 1;
-            cerrar = 1;
-          }
-          if (subopcion > 2) {
-            break;
-          }
+          BuscarLibro();
         } break;
 
         case 7: {
-          printf("Guardando...\n");
-          // GuardarCambios()
-          printf("Saliendo del sistema...\n");
-          salir = 1;
-          cerrar = 1;
+          GuardarCambios();
         } break;
 
         case 8: {
