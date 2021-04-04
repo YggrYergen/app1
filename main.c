@@ -17,7 +17,6 @@ int main(int argc, char** argv) {
   libros biblioteca[numb_rows];
 
   leer_csv(fp, biblioteca);
-
   fclose(fp);
 
   show_menu(biblioteca, numb_rows);
