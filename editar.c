@@ -1,6 +1,6 @@
 #include "header.h"
 
-void aniadir_libro(libros biblioteca[], int numb_rows) {
+void AniadirLibro(libros biblioteca[], int numb_rows) {
   int nuevo_row = numb_rows + 1;
   libros nueva_biblioteca[nuevo_row];
                   
@@ -35,7 +35,23 @@ void aniadir_libro(libros biblioteca[], int numb_rows) {
 }
 
 
-void quitar_libro(libros biblioteca[], int row_number){
+void QuitarLibro(libros biblioteca[], int row_number){
+  char borrar;
+  p("Qué libro desea quitar? \n");
+  s("%[^\n]", borrar);
+  
+  buscarlibro()
+
+  for (int i = 0; i < row_number; i++){
+    if (biblioteca[i].titulo == borrar){
+      
+
+      //Volver al menu principal
+    } else {
+      
+    }
+  }
+    p("¿qúe libro desea borrar?");
     borrar = s(¿qué libro desea borrar?);
     buscar match y eliminar;
 
@@ -51,18 +67,33 @@ void quitar_libro(libros biblioteca[], int row_number){
 }
 
 
-void aniadir_sede(libros biblioteca[], int row_number){
-  libros nueva_biblioteca[actual+1] = 0 0 0 0 0 sede nueva; 
-  equal(biblioteca, nueva_biblioteca);
+void AniadirSede(libros biblioteca[], int row_number){
+  int nuevo_row = numb_rows + 1;
+  libros nueva_biblioteca[nuevo_row];
+
   return nueva_biblioteca;
 
   // leer las sedes que hay
   // preguntar
   // añadir a las sedes que hay
+  char borrar;
+  p("Qué sección desea quitar? Recuerde que debe estar vacía. \n");
+  s("%[^\n]", borrar);
+  
+  for (int i = 0; i < row_number; i++){
+    if (biblioteca[i].info_estante.estante_seccion == borrar){
+      p("No se puede borrar un estante no vacío.\n");
+      p("Quite todos los libros del estante primero.\n\n");
+
+      //Volver al menu principal
+    } else {
+      
+    }
+  }
 }
 
 
-void quitar_sede() {
+void QuitarSede(biblioteca, numb_rows) {
   char borrar;
   p("Qué sede desea quitar? Recuerde que debe estar vacía. Si hay libros en ella puede irse a la chucha tranqui");
   s("%[^\n]", borrar);
@@ -75,12 +106,14 @@ void quitar_sede() {
 }
 
 
-void aniadir_seccion(){
+void AniadirSeccion(biblioteca, numb_rows){
+  p("añadir seccion: diga nombre nueo");
+  s("%s", )
   // crear nueva sección, añadiral a la base de datos. (¿Se puede crear añadiéndola a la base, en un mismo paso?)
 }
 
 
-void quitar_seccion(libros biblioteca[], int row_number){
+void QuitarSeccion(libros biblioteca[], int row_number){
   char borrar;
   p("Qué sección desea quitar? Recuerde que debe estar vacía. Si hay libros en ella puede irse a la chucha tranqui");
   s("%[^\n]", borrar);
@@ -112,13 +145,13 @@ void quitar_seccion(libros biblioteca[], int row_number){
 }
 
 
-void aniadir_piso(){
+void AniadirPiso(biblioteca, numb_rows){
   // OTRO
   // leer pisos existentes. Crear piso nuevo y añadir  pisos existentes.
 }
 
 
-void quitar_piso(){
+void QuitarPiso(biblioteca, numb_rows){
   // OTRO
   // revisar pisos, mostrar los vacios  
 }

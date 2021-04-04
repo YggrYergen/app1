@@ -33,10 +33,10 @@ void show_menu(libros biblioteca[], int numb_rows) {
           printf("\n");
           switch (subopcion) {
             case 1: {
-              aniadir_libro(biblioteca, numb_rows);
+              AniadirLibro(biblioteca, numb_rows);
             } break;
             case 2: {
-              QuitarLibro();
+              QuitarLibro(biblioteca, numb_rows);
             } break;
             case 3: {
               printf("Volviendo al menú principal...\n");
@@ -55,10 +55,10 @@ void show_menu(libros biblioteca[], int numb_rows) {
           printf("\n");
           switch (subopcion) {
             case 1: {
-              AniadirSede();
+              AniadirSede(biblioteca, numb_rows);
             } break;
             case 2: {
-              QuitarSede();
+              QuitarSede(biblioteca, numb_rows);
             } break;
             case 3: {
               printf("Volviendo al menú principal...\n");
