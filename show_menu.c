@@ -15,7 +15,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
     p("[4]   Añadir/Quitar una sección.\n");
     p("[5]   Editar libro.\n");
     p("[6]   Buscar libro.\n");
-    p("[7]   Salir del sistema.\n");
+    p("[7]   salir del sistema.\n");
     p("Opcion: ");
     s("%d", &opcion);
     p("\n");
@@ -34,11 +34,17 @@ void show_menu(libros biblioteca[], int numb_rows) {
           p("\n");
           switch (subopcion) {
             case 1: {
+              p("\e[1;1H\e[2J");
               // AñadirLibro()
+              opciones(&cerrar, &salir);
             } break;
+
             case 2: {
+              p("\e[1;1H\e[2J");
               // QuitarLibro()
+              opciones(&cerrar, &salir);
             } break;
+
             case 3: {
               p("\e[1;1H\e[2J");
               p("Volviendo al menú principal...\n");
@@ -59,11 +65,17 @@ void show_menu(libros biblioteca[], int numb_rows) {
           p("\n");
           switch (subopcion) {
             case 1: {
+              p("\e[1;1H\e[2J");
               // AñadirSede()
+              opciones(&cerrar, &salir);
             } break;
+
             case 2: {
+              p("\e[1;1H\e[2J");
               // QuitarSede()
+              opciones(&cerrar, &salir);
             } break;
+
             case 3: {
               p("\e[1;1H\e[2J");
               p("Volviendo al menú principal...\n");
@@ -84,11 +96,17 @@ void show_menu(libros biblioteca[], int numb_rows) {
           p("\n");
           switch (subopcion) {
             case 1: {
+              p("\e[1;1H\e[2J");
               // AñadirPiso()
+              opciones(&cerrar, &salir);
             } break;
+
             case 2: {
+              p("\e[1;1H\e[2J");
               // QuitarPiso()
+              opciones(&cerrar, &salir);
             } break;
+
             case 3: {
               p("\e[1;1H\e[2J");
               p("Volviendo al menú principal...\n");
@@ -109,11 +127,17 @@ void show_menu(libros biblioteca[], int numb_rows) {
           p("\n");
           switch (subopcion) {
             case 1: {
+              p("\e[1;1H\e[2J");
               // AñadirSec()
+              opciones(&cerrar, &salir);
             } break;
+
             case 2: {
+              p("\e[1;1H\e[2J");
               // QuitarSec()
+              opciones(&cerrar, &salir);
             } break;
+
             case 3: {
               p("\e[1;1H\e[2J");
               p("Volviendo al menú principal...\n");
@@ -138,35 +162,27 @@ void show_menu(libros biblioteca[], int numb_rows) {
             case 1: {
               p("\e[1;1H\e[2J");
               EditarLibro(biblioteca, numb_rows);
-              p("\n[1]   Volver al menú principal.\n");
-              p("[2]   Salir del sistema.\n");
-              p("Opcion: ");
-              s("%d", &subopcion);
-              p("\n");
-              if (subopcion == 1) {
-                p("\e[1;1H\e[2J");
-                p("Volviendo al menú principal...\n");
-                salir = 1;
-              }
-              if (subopcion == 2) {
-                p("\e[1;1H\e[2J");
-                p("Saliendo del sistema...\n");
-                salir = 1;
-                cerrar = 1;
-              }
-              if (subopcion > 2) {
-                break;
-              }
+              opciones(&cerrar, &salir);
             } break;
+
             case 2: {
-              // CambiarSede()
+              p("\e[1;1H\e[2J");
+              EditarSede(biblioteca, numb_rows);
+              opciones(&cerrar, &salir);
             } break;
+
             case 3: {
-              // CambiarPiso()
+              p("\e[1;1H\e[2J");
+              EditarPiso(biblioteca, numb_rows);
+              opciones(&cerrar, &salir);
             } break;
+
             case 4: {
-              // CambiarSec()
+              p("\e[1;1H\e[2J");
+              EditarSeccion(biblioteca, numb_rows);
+              opciones(&cerrar, &salir);
             } break;
+
             case 5: {
               p("\e[1;1H\e[2J");
               p("Volviendo al menú principal...\n");
@@ -178,25 +194,7 @@ void show_menu(libros biblioteca[], int numb_rows) {
         case 6: {
           p("\e[1;1H\e[2J");
           BuscarLibro(biblioteca, numb_rows);
-          p("\n[1]   Volver al menú principal.\n");
-          p("[2]   Salir del sistema.\n");
-          p("Opcion: ");
-          s("%d", &subopcion);
-          p("\n");
-          if (subopcion == 1) {
-            p("\e[1;1H\e[2J");
-            p("Volviendo al menú principal...\n");
-            salir = 1;
-          }
-          if (subopcion == 2) {
-            p("\e[1;1H\e[2J");
-            p("Saliendo del sistema...\n");
-            salir = 1;
-            cerrar = 1;
-          }
-          if (subopcion > 2) {
-            break;
-          }
+          opciones(&cerrar, &salir);
         } break;
 
         case 7: {

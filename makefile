@@ -1,7 +1,7 @@
-all: app1
+all: app
 
-app1: main.o read_csv.o show_menu.o funciones.o
-	gcc main.o read_csv.o show_menu.o funciones.o -o app1
+app: main.o read_csv.o show_menu.o funciones.o
+	gcc main.o read_csv.o show_menu.o funciones.o -o app
 
 main.o: main.c header.h
 	gcc -c main.c
@@ -16,4 +16,4 @@ show_menu.o: show_menu.c header.h
 	gcc -c show_menu.c
 
 clear:
-	rm -f app1 *.o 
+	rm -f app *.o 

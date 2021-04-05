@@ -32,7 +32,13 @@ typedef struct libros {
 void count_rows(int *a, FILE *input);
 void leer_csv(FILE *fp, libros biblioteca[]);
 void show_menu(libros biblioteca[], int numb_rows);
+void opciones(int *cerrar, int *salir);
 void BuscarLibro(libros biblioteca[], int numb_rows);
 void EditarLibro(libros biblioteca[], int numb_rows);
+void EditarSeccion(libros biblioteca[], int numb_rows);
+void EditarSede(libros biblioteca[], int numb_rows);
+void EditarPiso(libros biblioteca[], int numb_rows);
+// void QuitarLibro(libros biblioteca[], int numb_rows);
+// void AgregarLibro(libros biblioteca[], int numb_rows);
 
 #endif
