@@ -1,6 +1,6 @@
 #include "header.h"
 
-void opciones(int* cerrar, int* salir) {
+void opciones(int *cerrar, int *salir) {
   int subopcion;
   p("\n[1]   Volver al menú principal.\n");
   p("[2]   Salir del sistema.\n");
@@ -20,16 +20,17 @@ void opciones(int* cerrar, int* salir) {
   }
 }
 
-void BuscarLibro(libros biblioteca[], int numb_rows) {
+void BuscarLibro(libros *biblioteca, int *numb_rows) {
   char tituloABuscar[200];
   int found = 0;
   int a;
 
   p("\e[1;1H\e[2J");
+  p("numb_rows dentro buscar libro: %d\n", *numb_rows);
   p("Ingresa el nombre del libro: ");
   s(" %[^\n]", tituloABuscar);
 
-  for (int i = 0; i < numb_rows; i++) {
+  for (int i = 0; i < *numb_rows; i++) {
     if (strcmp(tituloABuscar, biblioteca[i].titulo) == 0) {
       found = 1;
       a = i;
@@ -53,7 +54,7 @@ void BuscarLibro(libros biblioteca[], int numb_rows) {
   }
 }
 
-void EditarLibro(libros biblioteca[], int numb_rows) {
+void EditarLibro(libros *biblioteca, int *numb_rows) {
   char book[200];
   char edit[200];
   int opcion3, found = 0, b = 1, a;
@@ -62,7 +63,7 @@ void EditarLibro(libros biblioteca[], int numb_rows) {
   fflush(stdout);
   scanf(" %[^\n]", book);
 
-  for (int i = 0; i < numb_rows; i++) {
+  for (int i = 0; i < *numb_rows; i++) {
     if (strcmp(book, biblioteca[i].titulo) == 0) {
       a = i;
       found = 1;
@@ -112,7 +113,7 @@ void EditarLibro(libros biblioteca[], int numb_rows) {
   }
 }
 
-void EditarSeccion(libros biblioteca[], int numb_rows) {
+void EditarSeccion(libros *biblioteca, int *numb_rows) {
   char edit[200];
   char book[200];
   int found = 0, a;
@@ -120,7 +121,7 @@ void EditarSeccion(libros biblioteca[], int numb_rows) {
   printf("Ingresa el nombre del libro que deseas editar: \n");
   fflush(stdout);
   scanf(" %[^\n]", book);
-  for (int i = 0; i < numb_rows; i++) {
+  for (int i = 0; i < *numb_rows; i++) {
     if (strcmp(book, biblioteca[i].titulo) == 0) {
       a = i;
       found = 1;
@@ -137,7 +138,7 @@ void EditarSeccion(libros biblioteca[], int numb_rows) {
   }
 }
 
-void EditarSede(libros biblioteca[], int numb_rows) {
+void EditarSede(libros *biblioteca, int *numb_rows) {
   char edit[200];
   char book[200];
   int found = 0, a, i;
@@ -145,7 +146,7 @@ void EditarSede(libros biblioteca[], int numb_rows) {
   printf("Ingresa el nombre del libro que deseas editar: \n");
   fflush(stdout);
   scanf(" %[^\n]", book);
-  for (i = 0; i < numb_rows; i++) {
+  for (i = 0; i < *numb_rows; i++) {
     if (strcmp(book, biblioteca[i].titulo) == 0) {
       a = i;
       found = 1;
@@ -161,7 +162,7 @@ void EditarSede(libros biblioteca[], int numb_rows) {
   }
 }
 
-void EditarPiso(libros biblioteca[], int numb_rows) {
+void EditarPiso(libros *biblioteca, int *numb_rows) {
   char edit[200];
   char book[200];
   int found = 0, a, i;
@@ -169,7 +170,7 @@ void EditarPiso(libros biblioteca[], int numb_rows) {
   printf("Ingresa el nombre del libro que deseas editar: \n");
   fflush(stdout);
   scanf(" %[^\n]", book);
-  for (i = 0; i < numb_rows; i++) {
+  for (i = 0; i < *numb_rows; i++) {
     if (strcmp(book, biblioteca[i].titulo) == 0) {
       a = i;
       found = 1;
@@ -184,14 +185,14 @@ void EditarPiso(libros biblioteca[], int numb_rows) {
     printf("Nuevo piso: %s\n", biblioteca[a].info_sede.piso);
   }
 }
-/*
-void QuitarLibro(libros biblioteca[], int numb_rows) {
+
+void QuitarLibro(libros *biblioteca, int numb_rows) {
   char tituloABuscar[200];
-  char vacio = "";
+  char *vacio = "";
   int found = 0;
   int a, borrar_o_no;
 
-  p("Ingresa el nombre del libro que deseas quitar: ");
+  p("Ingresa el nombre del libro que deseas quitar: \n");
   s(" %[^\n]", tituloABuscar);
 
   for (int i = 0; i < numb_rows; i++) {
@@ -216,7 +217,7 @@ void QuitarLibro(libros biblioteca[], int numb_rows) {
     p("¿Está seguro que desea quitar el libro?\n");
     p("[1]   Sí, quitar.\n");
     p("[2]   No, dejar.\n");
-    s("%d", borrar_o_no);
+    s("%d", &borrar_o_no);
     if (borrar_o_no == 1) {
       strcpy(biblioteca[a].titulo, vacio);
       strcpy(biblioteca[a].autor, vacio);
@@ -226,8 +227,6 @@ void QuitarLibro(libros biblioteca[], int numb_rows) {
       strcpy(biblioteca[a].info_sede.piso, vacio);
       strcpy(biblioteca[a].info_sede.edificio, vacio);
       strcpy(biblioteca[a].info_sede.sede, vacio);
-    } else {
-      p("Volviendo al menú principal...");
     }
 
   } else {
@@ -235,43 +234,63 @@ void QuitarLibro(libros biblioteca[], int numb_rows) {
   }
 }
 
-void AgregarLibro(libros biblioteca[], int numb_rows) {
-  int nuevo_row = numb_rows + 1;
-  libros nueva_biblioteca[nuevo_row];
+void AgregarLibro(libros *biblioteca, int *numb_rows) {
+  int new_row = *numb_rows;
+  *numb_rows = *numb_rows + 1;
+  char book[200];
+  biblioteca = (libros *)realloc(biblioteca, *numb_rows * sizeof(libros));
 
   p("\nPor favor, ingrese el nombre del libro que desea añadir: \n");
-  s("%s", nueva_biblioteca[nuevo_row].titulo);
+  s(" %[^\n]", book);
+  strcpy(biblioteca[new_row].titulo, book);
   p("\nPor favor, ingrese el autor del libro que desea añadir: \n");
-  s("%s", nueva_biblioteca[nuevo_row].autor);
+  s(" %[^\n]", book);
+  strcpy(biblioteca[new_row].autor, book);
   p("\nPor favor, ingrese el año de publicación del libro que desea añadir: "
     "\n");
-  s("%s", nueva_biblioteca[nuevo_row].anio);
-  p("\nPor favor, aique en qué sede desea guardarlo: \n");
-  s("%s", nueva_biblioteca[nuevo_row].info_sede.sede);
-  p("\nPor favor, aique en qué edificio de la sede %s desea guardarlo: \n",
-    nueva_biblioteca[nuevo_row].info_sede.sede);
-  s("%s", nueva_biblioteca[nuevo_row].info_sede.edificio);
-  p("\nPor favor, aique en qué piso del edificio %s desea guardarlo: \n",
-    nueva_biblioteca[nuevo_row].info_sede.edificio);
-  s("%s", nueva_biblioteca[nuevo_row].);
-  p("\nPor favor, aique en qué sección guardarlo\n");
-  s("%s", nueva_biblioteca[nuevo_row].info_estante.estante_seccion);
+  s(" %[^\n]", book);
+  strcpy(biblioteca[new_row].anio, book);
+  p("\nPor favor, especifique en qué sede desea guardarlo: \n");
+  s(" %[^\n]", book);
+  strcpy(biblioteca[new_row].info_sede.sede, book);
+  p("\nPor favor, especifique en qué edificio de la sede %s desea guardarlo: "
+    "\n",
+    biblioteca[new_row].info_sede.sede);
+  s(" %[^\n]", book);
+  strcpy(biblioteca[new_row].info_sede.edificio, book);
+  p("\nPor favor, especifique en qué piso del edificio %s desea guardarlo: \n",
+    biblioteca[new_row].info_sede.edificio);
+  s(" %[^\n]", book);
+  strcpy(biblioteca[new_row].info_sede.piso, book);
+  p("\nPor favor, especifique en qué sección guardarlo\n");
+  s(" %[^\n]", book);
+  strcpy(biblioteca[new_row].info_estante.estante_seccion, book);
   p("\nPor favor, aique en qué número de estante guardarlo\n");
-  s("%s", nueva_biblioteca[nuevo_row].info_estante.estante_numero);
+  s(" %[^\n]", book);
+  strcpy(biblioteca[new_row].info_estante.estante_numero, book);
 
-  for (int i = 0; i <= nuevo_row - 1; i++) {
-    strcpy(nueva_biblioteca[i].titulo, biblioteca[i].titulo);
-    strcpy(nueva_biblioteca[i].autor, biblioteca[i].autor);
-    strcpy(nueva_biblioteca[i].anio, biblioteca[i].anio);
-    strcpy(nueva_biblioteca[i].info_estante.estante_numero,
-           biblioteca[i].info_estante.estante_numero);
-    strcpy(nueva_biblioteca[i].info_estante.estante_numero,
-           biblioteca[i].info_estante.estante_numero);
-    strcpy(nueva_biblioteca[i].info_sede.piso, biblioteca[i].info_sede.piso);
-    strcpy(nueva_biblioteca[i].info_sede.edificio,
-           biblioteca[i].info_sede.edificio);
-    strcpy(nueva_biblioteca[i].info_sede.sede, biblioteca[i].info_sede.sede);
-  }
+  p("\e[1;1H\e[2J");
+  p("\n Libro guardado exitosamente!\n\n"
+    "Información acerca del libro:\n");
+  p("  Título: %s\n", biblioteca[new_row].titulo);
+  p("  Autor: %s\n", biblioteca[new_row].autor);
+  p("  Año: %s\n", biblioteca[new_row].anio);
+  p("Ubicación del libro:\n");
+  p("  Estante: %s\n", biblioteca[new_row].info_estante.estante_numero);
+  p("  Sección: %s\n", biblioteca[new_row].info_estante.estante_seccion);
+  p("  Piso: %s\n", biblioteca[new_row].info_sede.piso);
+  p("  Edificio:%s\n", biblioteca[new_row].info_sede.edificio);
+  p("  Sede: %s\n", biblioteca[new_row].info_sede.sede);
+}
 
-  p("\n\n Libro guardaro exitosamente!\n\n");
-}*/
+void AnadirSede(nuevos_datos NuevosDatos[], int cont) {
+  char nuevasede[200];
+
+  p("Ingresa la sede que desea anadir: \n");
+  fflush(stdout);
+  scanf(" %[^\n]", nuevasede);
+  strcpy(NuevosDatos[cont].sede, nuevasede);
+  printf("La sede %s ", nuevasede);
+  printf("ha sido agregada.\n");
+  fflush(stdout);
+}

@@ -1,11 +1,9 @@
 #include "header.h"
 
-void show_menu(libros biblioteca[], int numb_rows) {
+void show_menu(libros biblioteca[], int *numb_rows) {
   int cerrar = 0;
   while (cerrar == 0) {
-    int opcion;
-    int subopcion;
-    int salir = 0;
+    int opcion, subopcion, salir = 0;
 
     p("\n¡Bienvenido a la biblioteca UAI!\n");
     p("Selecciona una opción: \n");
@@ -35,13 +33,14 @@ void show_menu(libros biblioteca[], int numb_rows) {
           switch (subopcion) {
             case 1: {
               p("\e[1;1H\e[2J");
-              // AñadirLibro()
+              AgregarLibro(biblioteca, numb_rows);
+              printvalues(biblioteca, numb_rows);
               opciones(&cerrar, &salir);
             } break;
 
             case 2: {
               p("\e[1;1H\e[2J");
-              // QuitarLibro()
+              // QuitarLibro(biblioteca, numb_rows);
               opciones(&cerrar, &salir);
             } break;
 
