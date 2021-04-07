@@ -20,8 +20,6 @@ void llenarSedes(libros biblioteca[], nuevos_datos NuevosDatos[], int j) {
       strcpy(NuevosDatos[contador].sede, biblioteca[i].info_sede.sede);
     }
   }
-  for (int i = 0; i <= contador; i++)
-    printf("sede %d: %s\n", i + 1, NuevosDatos[i].sede);
 }
 
 void llenarPisos(libros biblioteca[], nuevos_datos NuevosDatos[], int j) {
@@ -44,8 +42,6 @@ void llenarPisos(libros biblioteca[], nuevos_datos NuevosDatos[], int j) {
       strcpy(NuevosDatos[contador].piso, biblioteca[i].info_sede.piso);
     }
   }
-  for (int i = 0; i <= contador; i++)
-    printf("piso %d: %s\n", i + 1, NuevosDatos[i].piso);
 }
 
 void llenarSecciones(libros biblioteca[], nuevos_datos NuevosDatos[], int j) {
@@ -69,9 +65,6 @@ void llenarSecciones(libros biblioteca[], nuevos_datos NuevosDatos[], int j) {
              biblioteca[i].info_estante.estante_seccion);
     }
   }
-
-  for (int i = 0; i <= contador; i++)
-    printf("seccion %d: %s\n", i + 1, NuevosDatos[i].sec);
 }
 
 void opciones(int *cerrar, int *salir) {
@@ -314,15 +307,24 @@ void QuitarLibro(libros Datos[], int j) {
 
 void AnadirSede(nuevos_datos NuevosDatos[], int cont) {
   char nuevasede[200];
+  int y = 0, found = 0;
 
   p("\e[1;1H\e[2J");
   p("Ingresa la sede que desea anadir: \n");
   fflush(stdout);
   s(" %[^\n]", nuevasede);
-  strcpy(NuevosDatos[cont].sede, nuevasede);
-  p("La sede %s ", nuevasede);
-  p("ha sido agregada.\n");
-  fflush(stdout);
+  for (y = 0; y <= 100; ++y) {
+    if (strcmp(nuevasede, NuevosDatos[y].sede) == 0) found = 1;
+  }
+  if (found == 1) {
+    printf("La sede ya existe.\n");
+    fflush(stdout);
+  } else {
+    strcpy(NuevosDatos[cont].sede, nuevasede);
+    p("La sede %s ", nuevasede);
+    p("ha sido agregada.\n");
+    fflush(stdout);
+  }
 }
 
 void QuitarSede(libros Datos[], nuevos_datos NuevosDatos[], int j) {
@@ -365,15 +367,24 @@ void QuitarSede(libros Datos[], nuevos_datos NuevosDatos[], int j) {
 
 void AnadirPiso(nuevos_datos NuevosDatos[], int cont) {
   char nuevapiso[200];
+  int found = 0, y = 0;
 
   p("\e[1;1H\e[2J");
   p("Ingresa el piso que desea anadir: \n");
   fflush(stdout);
   scanf(" %[^\n]", nuevapiso);
-  strcpy(NuevosDatos[cont].piso, nuevapiso);
-  printf("El piso %s ", nuevapiso);
-  printf("ha sido agregado.\n");
-  fflush(stdout);
+  for (y = 0; y <= 100; ++y) {
+    if (strcmp(nuevapiso, NuevosDatos[y].piso) == 0) found = 1;
+  }
+  if (found == 1) {
+    printf("El piso ya existe.\n");
+    fflush(stdout);
+  } else {
+    strcpy(NuevosDatos[cont].piso, nuevapiso);
+    printf("El piso %s ", nuevapiso);
+    printf("ha sido agregado.\n");
+    fflush(stdout);
+  }
 }
 
 void QuitarPiso(libros Datos[], nuevos_datos NuevosDatos[], int j) {
@@ -416,15 +427,24 @@ void QuitarPiso(libros Datos[], nuevos_datos NuevosDatos[], int j) {
 
 void AnadirSec(nuevos_datos NuevosDatos[], int cont) {
   char nuevasec[200];
+  int found = 0, y = 0;
 
   p("\e[1;1H\e[2J");
   p("Ingresa la seccion que desea anadir: \n");
   fflush(stdout);
   scanf(" %[^\n]", nuevasec);
-  strcpy(NuevosDatos[cont].sec, nuevasec);
-  printf("La seccion %s ", nuevasec);
-  printf("ha sido agregada.\n");
-  fflush(stdout);
+  for (y = 0; y <= 100; ++y) {
+    if (strcmp(nuevasec, NuevosDatos[y].sec) == 0) found = 1;
+  }
+  if (found == 1) {
+    printf("La seccion ya existe.\n");
+    fflush(stdout);
+  } else {
+    strcpy(NuevosDatos[cont].sec, nuevasec);
+    printf("La seccion %s ", nuevasec);
+    printf("ha sido agregada.\n");
+    fflush(stdout);
+  }
 }
 
 void QuitarSec(libros Datos[], nuevos_datos NuevosDatos[], int j) {
@@ -467,7 +487,6 @@ void QuitarSec(libros Datos[], nuevos_datos NuevosDatos[], int j) {
 
 void Guardar(libros Datos[], int j, char *archivo_csv) {
   int x;
-
   FILE *notas2 = fopen(archivo_csv, "w+");
 
   fprintf(notas2,
@@ -478,7 +497,6 @@ void Guardar(libros Datos[], int j, char *archivo_csv) {
     if (strcmp(Datos[x].titulo, "del") == 0) {
       continue;
     }
-
     if (x < j - 1) {
       fprintf(notas2, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
               "\"", Datos[x].titulo, "\"", ",", "\"", Datos[x].autor, "\"", ",",
@@ -495,6 +513,5 @@ void Guardar(libros Datos[], int j, char *archivo_csv) {
               "\"", ",", "\"", Datos[x].info_sede.sede, "\"");
     }
   }
-
   fclose(notas2);
 }

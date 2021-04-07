@@ -2,7 +2,7 @@
 
 void show_menu(libros biblioteca[], nuevos_datos NuevosDatos[],
                char* archivo_csv, int j) {
-  int cerrar = 0, cont = 0, trig = 0;
+  int cerrar = 0, cont = j, trig = 0;
   while (cerrar == 0) {
     int opcion, subopcion, salir = 0;
     if (trig == 1) {
@@ -59,6 +59,7 @@ void show_menu(libros biblioteca[], nuevos_datos NuevosDatos[],
             case 2: {
               p("\e[1;1H\e[2J");
               QuitarLibro(biblioteca, j);
+              j--;
               Guardar(biblioteca, j, archivo_csv);
               opciones(&cerrar, &salir);
             } break;

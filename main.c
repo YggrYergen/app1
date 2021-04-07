@@ -26,5 +26,5 @@ int main(int argc, char** argv) {
   llenarSedes(biblioteca, NuevosDatos, j);
   llenarPisos(biblioteca, NuevosDatos, j);
   llenarSecciones(biblioteca, NuevosDatos, j);
-  // show_menu(biblioteca, NuevosDatos, archivo_csv, j);
+  show_menu(biblioteca, NuevosDatos, archivo_csv, j);
 }
