@@ -34,17 +34,26 @@ typedef struct nuevos_datos {
   char sec[50];
 } nuevos_datos;
 
-void printvalues(libros *biblioteca, int *numb_rows);
+// void printvalues(libros *biblioteca, int *numb_rows);
 void count_rows(int *a, FILE *input);
 void leer_csv(FILE *fp, libros *biblioteca);
-void show_menu(libros *biblioteca, int *numb_rows);
+void llenarSedes(libros biblioteca[], nuevos_datos NuevosDatos[], int j);
+void show_menu(libros biblioteca[], nuevos_datos NuevosDatos[],
+               char *archivo_csv, int j);
 void opciones(int *cerrar, int *salir);
-void BuscarLibro(libros *biblioteca, int *numb_rows);
-void EditarLibro(libros *biblioteca, int *numb_rows);
-void EditarSeccion(libros *biblioteca, int *numb_rows);
-void EditarSede(libros *biblioteca, int *numb_rows);
-void EditarPiso(libros *biblioteca, int *numb_rows);
-// void QuitarLibro(libros biblioteca[], int numb_rows);
-void AgregarLibro(libros *biblioteca, int *numb_rows);
+void BuscarLibro(libros *biblioteca, int j);
+void EditarLibro(libros *biblioteca, int j);
+void EditarSeccion(libros *biblioteca, int j);
+void EditarSede(libros *biblioteca, int j);
+void EditarPiso(libros *biblioteca, int j);
+void AgregarLibro(char *archivo_csv);
+void QuitarLibro(libros Datos[], int j);
+void AnadirSede(nuevos_datos NuevosDatos[], int cont);
+void QuitarSede(libros Datos[], nuevos_datos NuevosDatos[], int j);
+void AnadirPiso(nuevos_datos NuevosDatos[], int cont);
+void QuitarPiso(libros Datos[], nuevos_datos NuevosDatos[], int j);
+void AnadirSec(nuevos_datos NuevosDatos[], int cont);
+void QuitarSec(libros Datos[], nuevos_datos NuevosDatos[], int j);
+void Guardar(libros Datos[], int j, char *archivo_csv);
 
 #endif

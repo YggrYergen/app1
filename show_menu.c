@@ -1,9 +1,26 @@
 #include "header.h"
 
-void show_menu(libros biblioteca[], int *numb_rows) {
-  int cerrar = 0;
+void show_menu(libros biblioteca[], nuevos_datos NuevosDatos[],
+               char* archivo_csv, int j) {
+  int cerrar = 0, cont = 0, trig = 0;
   while (cerrar == 0) {
     int opcion, subopcion, salir = 0;
+    if (trig == 1) {
+      j = 0;
+      FILE* notas = fopen(archivo_csv, "r");
+
+      for (char c = getc(notas); c != EOF; c = getc(notas)) {
+        if (c == '\n') {
+          j++;
+        }
+      }
+
+      rewind(notas);
+
+      leer_csv(notas, biblioteca);
+      fclose(notas);
+      trig = 0;
+    }
 
     p("\n¡Bienvenido a la biblioteca UAI!\n");
     p("Selecciona una opción: \n");
@@ -33,14 +50,16 @@ void show_menu(libros biblioteca[], int *numb_rows) {
           switch (subopcion) {
             case 1: {
               p("\e[1;1H\e[2J");
-              AgregarLibro(biblioteca, numb_rows);
-              printvalues(biblioteca, numb_rows);
+              Guardar(biblioteca, j, archivo_csv);
+              AgregarLibro(archivo_csv);
+              trig = 1;
               opciones(&cerrar, &salir);
             } break;
 
             case 2: {
               p("\e[1;1H\e[2J");
-              // QuitarLibro(biblioteca, numb_rows);
+              QuitarLibro(biblioteca, j);
+              Guardar(biblioteca, j, archivo_csv);
               opciones(&cerrar, &salir);
             } break;
 
@@ -65,13 +84,14 @@ void show_menu(libros biblioteca[], int *numb_rows) {
           switch (subopcion) {
             case 1: {
               p("\e[1;1H\e[2J");
-              // AñadirSede()
+              AnadirSede(NuevosDatos, cont);
+              cont++;
               opciones(&cerrar, &salir);
             } break;
 
             case 2: {
               p("\e[1;1H\e[2J");
-              // QuitarSede()
+              QuitarSede(biblioteca, NuevosDatos, j);
               opciones(&cerrar, &salir);
             } break;
 
@@ -96,13 +116,14 @@ void show_menu(libros biblioteca[], int *numb_rows) {
           switch (subopcion) {
             case 1: {
               p("\e[1;1H\e[2J");
-              // AñadirPiso()
+              AnadirPiso(NuevosDatos, cont);
+              cont++;
               opciones(&cerrar, &salir);
             } break;
 
             case 2: {
               p("\e[1;1H\e[2J");
-              // QuitarPiso()
+              QuitarPiso(biblioteca, NuevosDatos, j);
               opciones(&cerrar, &salir);
             } break;
 
@@ -127,13 +148,14 @@ void show_menu(libros biblioteca[], int *numb_rows) {
           switch (subopcion) {
             case 1: {
               p("\e[1;1H\e[2J");
-              // AñadirSec()
+              AnadirSec(NuevosDatos, cont);
+              cont++;
               opciones(&cerrar, &salir);
             } break;
 
             case 2: {
               p("\e[1;1H\e[2J");
-              // QuitarSec()
+              QuitarSec(biblioteca, NuevosDatos, j);
               opciones(&cerrar, &salir);
             } break;
 
@@ -160,25 +182,26 @@ void show_menu(libros biblioteca[], int *numb_rows) {
           switch (subopcion) {
             case 1: {
               p("\e[1;1H\e[2J");
-              EditarLibro(biblioteca, numb_rows);
+              EditarLibro(biblioteca, j);
+              Guardar(biblioteca, j, archivo_csv);
               opciones(&cerrar, &salir);
             } break;
 
             case 2: {
               p("\e[1;1H\e[2J");
-              EditarSede(biblioteca, numb_rows);
+              EditarSede(biblioteca, j);
               opciones(&cerrar, &salir);
             } break;
 
             case 3: {
               p("\e[1;1H\e[2J");
-              EditarPiso(biblioteca, numb_rows);
+              EditarPiso(biblioteca, j);
               opciones(&cerrar, &salir);
             } break;
 
             case 4: {
               p("\e[1;1H\e[2J");
-              EditarSeccion(biblioteca, numb_rows);
+              EditarSeccion(biblioteca, j);
               opciones(&cerrar, &salir);
             } break;
 
@@ -192,19 +215,22 @@ void show_menu(libros biblioteca[], int *numb_rows) {
 
         case 6: {
           p("\e[1;1H\e[2J");
-          BuscarLibro(biblioteca, numb_rows);
+          Guardar(biblioteca, j, archivo_csv);
+          BuscarLibro(biblioteca, j);
           opciones(&cerrar, &salir);
         } break;
 
         case 7: {
-          p("\e[1;1H\e[2J");
-          p("Guardando...\n");
-          // GuardarCambios()
-          p("Saliendo del sistema...\n");
           salir = 1;
           cerrar = 1;
         } break;
       }
     } while (salir == 0);
+    if (cerrar == 1) {
+      p("\e[1;1H\e[2J");
+      p("Guardando...\n");
+      Guardar(biblioteca, j, archivo_csv);
+      p("Saliendo del sistema...\n");
+    }
   }
 }

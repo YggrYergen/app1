@@ -1,5 +1,30 @@
 #include "header.h"
 
+void llenarSedes(libros biblioteca[], nuevos_datos NuevosDatos[], int j) {
+  int contador = 0;
+  for (int i = 0; i < j; i++) {
+    int aux = 0;
+    if (i == 0) {
+      strcpy(NuevosDatos[i].sede, biblioteca[i].info_sede.sede);
+      continue;
+    }
+    for (int k = i; k = 0; k--) {
+      if (strcmp(biblioteca[i].info_sede.sede,
+                 biblioteca[k - 1].info_sede.sede) == 0) {
+        aux = 1;
+        continue;
+      }
+    }
+    if (aux == 0) {
+      contador++;
+      strcpy(NuevosDatos[contador].sede, biblioteca[contador].info_sede.sede);
+    }
+  }
+
+  for (int i = 0; i <= contador; i++)
+    printf("sede %d: %s\n", i + 1, NuevosDatos[i].sede);
+}
+
 void opciones(int *cerrar, int *salir) {
   int subopcion;
   p("\n[1]   Volver al menú principal.\n");
@@ -20,17 +45,16 @@ void opciones(int *cerrar, int *salir) {
   }
 }
 
-void BuscarLibro(libros *biblioteca, int *numb_rows) {
+void BuscarLibro(libros *biblioteca, int j) {
   char tituloABuscar[200];
   int found = 0;
   int a;
 
   p("\e[1;1H\e[2J");
-  p("numb_rows dentro buscar libro: %d\n", *numb_rows);
   p("Ingresa el nombre del libro: ");
   s(" %[^\n]", tituloABuscar);
 
-  for (int i = 0; i < *numb_rows; i++) {
+  for (int i = 0; i <= j; i++) {
     if (strcmp(tituloABuscar, biblioteca[i].titulo) == 0) {
       found = 1;
       a = i;
@@ -54,16 +78,16 @@ void BuscarLibro(libros *biblioteca, int *numb_rows) {
   }
 }
 
-void EditarLibro(libros *biblioteca, int *numb_rows) {
+void EditarLibro(libros *biblioteca, int j) {
   char book[200];
   char edit[200];
   int opcion3, found = 0, b = 1, a;
 
   p("Ingresa el nombre del libro que deseas editar: \n");
   fflush(stdout);
-  scanf(" %[^\n]", book);
+  s(" %[^\n]", book);
 
-  for (int i = 0; i < *numb_rows; i++) {
+  for (int i = 0; i <= j; i++) {
     if (strcmp(book, biblioteca[i].titulo) == 0) {
       a = i;
       found = 1;
@@ -82,8 +106,8 @@ void EditarLibro(libros *biblioteca, int *numb_rows) {
       case 1: {
         p("Ingrese el autor:\n");
         fflush(stdout);
-        scanf(" %[^\n]", edit);
-        p("\e[1;1H\e[2numb_rows");
+        s(" %[^\n]", edit);
+        p("\e[1;1H\e[2J");
         p("\nAutor Antiguo: %s\n", biblioteca[a].autor);
         strcpy(biblioteca[a].autor, edit);
         p("Autor Nuevo: %s\n\n", biblioteca[a].autor);
@@ -91,7 +115,7 @@ void EditarLibro(libros *biblioteca, int *numb_rows) {
       case 2: {
         p("Ingrese titulo.\n");
         fflush(stdout);
-        scanf(" %[^\n]", edit);
+        s(" %[^\n]", edit);
         p("Old: %s\n", biblioteca[a].titulo);
         strcpy(biblioteca[a].titulo, edit);
         p("New: %s\n", biblioteca[a].titulo);
@@ -99,198 +123,329 @@ void EditarLibro(libros *biblioteca, int *numb_rows) {
       case 3: {
         p("Ingrese anio.\n");
         fflush(stdout);
-        scanf(" %[^\n]", edit);
+        s(" %[^\n]", edit);
         p("Old: %s\n", biblioteca[a].anio);
         strcpy(biblioteca[a].anio, edit);
         p("New: %s\n", biblioteca[a].anio);
       } break;
       default: {
-        printf("Opcion invalida.\n");
+        p("Opcion invalida.\n");
       } break;
     }
-  } else {
-    printf("No se encuentra el libro.\n");
-  }
-}
-
-void EditarSeccion(libros *biblioteca, int *numb_rows) {
-  char edit[200];
-  char book[200];
-  int found = 0, a;
-
-  printf("Ingresa el nombre del libro que deseas editar: \n");
-  fflush(stdout);
-  scanf(" %[^\n]", book);
-  for (int i = 0; i < *numb_rows; i++) {
-    if (strcmp(book, biblioteca[i].titulo) == 0) {
-      a = i;
-      found = 1;
-    }
-  }
-  if (found == 1) {
-    printf("\nSeccion actual: %s\n",
-           biblioteca[a].info_estante.estante_seccion);
-    printf("\nIngrese nueva seccion:\n");
-    fflush(stdout);
-    scanf(" %[^\n]", edit);
-    strcpy(biblioteca[a].info_estante.estante_seccion, edit);
-    printf("Nueva seccion: %s\n", biblioteca[a].info_estante.estante_seccion);
-  }
-}
-
-void EditarSede(libros *biblioteca, int *numb_rows) {
-  char edit[200];
-  char book[200];
-  int found = 0, a, i;
-
-  printf("Ingresa el nombre del libro que deseas editar: \n");
-  fflush(stdout);
-  scanf(" %[^\n]", book);
-  for (i = 0; i < *numb_rows; i++) {
-    if (strcmp(book, biblioteca[i].titulo) == 0) {
-      a = i;
-      found = 1;
-    }
-  }
-  if (found == 1) {
-    printf("\nSede actual: %s\n", biblioteca[a].info_sede.sede);
-    printf("Ingrese nueva sede:\n");
-    fflush(stdout);
-    scanf(" %[^\n]", edit);
-    strcpy(biblioteca[a].info_sede.sede, edit);
-    printf("Nueva sede: %s\n", biblioteca[a].info_sede.sede);
-  }
-}
-
-void EditarPiso(libros *biblioteca, int *numb_rows) {
-  char edit[200];
-  char book[200];
-  int found = 0, a, i;
-
-  printf("Ingresa el nombre del libro que deseas editar: \n");
-  fflush(stdout);
-  scanf(" %[^\n]", book);
-  for (i = 0; i < *numb_rows; i++) {
-    if (strcmp(book, biblioteca[i].titulo) == 0) {
-      a = i;
-      found = 1;
-    }
-  }
-  if (found == 1) {
-    printf("\nPiso actual: %s\n", biblioteca[a].info_sede.piso);
-    printf("Ingrese el piso:\n");
-    fflush(stdout);
-    scanf(" %[^\n]", edit);
-    strcpy(biblioteca[a].info_sede.piso, edit);
-    printf("Nuevo piso: %s\n", biblioteca[a].info_sede.piso);
-  }
-}
-
-void QuitarLibro(libros *biblioteca, int numb_rows) {
-  char tituloABuscar[200];
-  char *vacio = "";
-  int found = 0;
-  int a, borrar_o_no;
-
-  p("Ingresa el nombre del libro que deseas quitar: \n");
-  s(" %[^\n]", tituloABuscar);
-
-  for (int i = 0; i < numb_rows; i++) {
-    if (strcmp(tituloABuscar, biblioteca[i].titulo) == 0) {
-      found = 1;
-      a = i;
-    }
-  }
-
-  if (found == 1) {
-    p("Libro encontrado.\n");
-    p("Información acerca del libro:\n");
-    p("  Título: %s\n", biblioteca[a].titulo);
-    p("  Autor: %s\n", biblioteca[a].autor);
-    p("  Año: %s\n", biblioteca[a].anio);
-    p("Ubicación del libro:\n");
-    p("  Estante: %s\n", biblioteca[a].info_estante.estante_numero);
-    p("  Sección: %s\n", biblioteca[a].info_estante.estante_seccion);
-    p("  Piso: %s\n", biblioteca[a].info_sede.piso);
-    p("  Edificio:%s\n", biblioteca[a].info_sede.edificio);
-    p("  Sede: %s\n", biblioteca[a].info_sede.sede);
-    p("¿Está seguro que desea quitar el libro?\n");
-    p("[1]   Sí, quitar.\n");
-    p("[2]   No, dejar.\n");
-    s("%d", &borrar_o_no);
-    if (borrar_o_no == 1) {
-      strcpy(biblioteca[a].titulo, vacio);
-      strcpy(biblioteca[a].autor, vacio);
-      strcpy(biblioteca[a].anio, vacio);
-      strcpy(biblioteca[a].info_estante.estante_numero, vacio);
-      strcpy(biblioteca[a].info_estante.estante_seccion, vacio);
-      strcpy(biblioteca[a].info_sede.piso, vacio);
-      strcpy(biblioteca[a].info_sede.edificio, vacio);
-      strcpy(biblioteca[a].info_sede.sede, vacio);
-    }
-
   } else {
     p("No se encuentra el libro.\n");
   }
 }
 
-void AgregarLibro(libros *biblioteca, int *numb_rows) {
-  int new_row = *numb_rows;
-  *numb_rows = *numb_rows + 1;
+void EditarSeccion(libros *biblioteca, int j) {
+  char edit[200];
   char book[200];
-  biblioteca = (libros *)realloc(biblioteca, *numb_rows * sizeof(libros));
+  int found = 0, a;
 
-  p("\nPor favor, ingrese el nombre del libro que desea añadir: \n");
+  p("Ingresa el nombre del libro que deseas editar: \n");
+  fflush(stdout);
   s(" %[^\n]", book);
-  strcpy(biblioteca[new_row].titulo, book);
-  p("\nPor favor, ingrese el autor del libro que desea añadir: \n");
+  for (int i = 0; i <= j; i++) {
+    if (strcmp(book, biblioteca[i].titulo) == 0) {
+      a = i;
+      found = 1;
+    }
+  }
+  if (found == 1) {
+    p("\nSeccion actual: %s\n", biblioteca[a].info_estante.estante_seccion);
+    p("\nIngrese nueva seccion:\n");
+    fflush(stdout);
+    s(" %[^\n]", edit);
+    strcpy(biblioteca[a].info_estante.estante_seccion, edit);
+    p("Nueva seccion: %s\n", biblioteca[a].info_estante.estante_seccion);
+  }
+}
+
+void EditarSede(libros *biblioteca, int j) {
+  char edit[200];
+  char book[200];
+  int found = 0, a, i;
+
+  p("Ingresa el nombre del libro que deseas editar: \n");
+  fflush(stdout);
   s(" %[^\n]", book);
-  strcpy(biblioteca[new_row].autor, book);
-  p("\nPor favor, ingrese el año de publicación del libro que desea añadir: "
-    "\n");
+  for (i = 0; i <= j; i++) {
+    if (strcmp(book, biblioteca[i].titulo) == 0) {
+      a = i;
+      found = 1;
+    }
+  }
+  if (found == 1) {
+    p("\nSede actual: %s\n", biblioteca[a].info_sede.sede);
+    p("Ingrese nueva sede:\n");
+    fflush(stdout);
+    s(" %[^\n]", edit);
+    strcpy(biblioteca[a].info_sede.sede, edit);
+    p("Nueva sede: %s\n", biblioteca[a].info_sede.sede);
+  }
+}
+
+void EditarPiso(libros *biblioteca, int j) {
+  char edit[200];
+  char book[200];
+  int found = 0, a, i;
+
+  p("Ingresa el nombre del libro que deseas editar: \n");
+  fflush(stdout);
   s(" %[^\n]", book);
-  strcpy(biblioteca[new_row].anio, book);
-  p("\nPor favor, especifique en qué sede desea guardarlo: \n");
-  s(" %[^\n]", book);
-  strcpy(biblioteca[new_row].info_sede.sede, book);
-  p("\nPor favor, especifique en qué edificio de la sede %s desea guardarlo: "
-    "\n",
-    biblioteca[new_row].info_sede.sede);
-  s(" %[^\n]", book);
-  strcpy(biblioteca[new_row].info_sede.edificio, book);
-  p("\nPor favor, especifique en qué piso del edificio %s desea guardarlo: \n",
-    biblioteca[new_row].info_sede.edificio);
-  s(" %[^\n]", book);
-  strcpy(biblioteca[new_row].info_sede.piso, book);
-  p("\nPor favor, especifique en qué sección guardarlo\n");
-  s(" %[^\n]", book);
-  strcpy(biblioteca[new_row].info_estante.estante_seccion, book);
-  p("\nPor favor, aique en qué número de estante guardarlo\n");
-  s(" %[^\n]", book);
-  strcpy(biblioteca[new_row].info_estante.estante_numero, book);
+  for (i = 0; i <= j; i++) {
+    if (strcmp(book, biblioteca[i].titulo) == 0) {
+      a = i;
+      found = 1;
+    }
+  }
+  if (found == 1) {
+    p("\nPiso actual: %s\n", biblioteca[a].info_sede.piso);
+    p("Ingrese el piso:\n");
+    fflush(stdout);
+    s(" %[^\n]", edit);
+    strcpy(biblioteca[a].info_sede.piso, edit);
+    p("Nuevo piso: %s\n", biblioteca[a].info_sede.piso);
+  }
+}
+
+void AgregarLibro(char *archivo_csv) {
+  char info_libro[1024];
 
   p("\e[1;1H\e[2J");
-  p("\n Libro guardado exitosamente!\n\n"
-    "Información acerca del libro:\n");
-  p("  Título: %s\n", biblioteca[new_row].titulo);
-  p("  Autor: %s\n", biblioteca[new_row].autor);
-  p("  Año: %s\n", biblioteca[new_row].anio);
-  p("Ubicación del libro:\n");
-  p("  Estante: %s\n", biblioteca[new_row].info_estante.estante_numero);
-  p("  Sección: %s\n", biblioteca[new_row].info_estante.estante_seccion);
-  p("  Piso: %s\n", biblioteca[new_row].info_sede.piso);
-  p("  Edificio:%s\n", biblioteca[new_row].info_sede.edificio);
-  p("  Sede: %s\n", biblioteca[new_row].info_sede.sede);
+  p("Ingresa la información del libro a agregar:\n");
+  p("El formato admitido es: "
+    "\"titulo\",\"autor\",anio,estante_numero,\"estante_seccion\",piso,"
+    "\"edificio\",\"sede\"\n");
+  fflush(stdout);
+  s(" %[^\n]", info_libro);
+
+  FILE *agregar = fopen(archivo_csv, "a");
+  fprintf(agregar, "\n%s", info_libro);
+  fclose(agregar);
+
+  p("\e[1;1H\e[2J");
+  p("\n Libro guardado exitosamente!\n\n");
+}
+
+void QuitarLibro(libros Datos[], int j) {
+  char tituloAQuitar[200];
+  int found = 0;
+  int ind;
+  int y;
+
+  p("\e[1;1H\e[2J");
+  p("Ingresa el nombre del libro a eliminar:\n");
+  fflush(stdout);
+  s(" %[^\n]", tituloAQuitar);
+
+  for (y = 0; y < j; ++y) {
+    if (strcmp(tituloAQuitar, Datos[y].titulo) == 0) {
+      found = 1;
+      ind = y;
+    }
+  }
+
+  if (found == 1) {
+    p("Libro encontrado.\n");
+    strcpy(Datos[ind].titulo, "del");
+    strcpy(Datos[ind].autor, " ");
+    strcpy(Datos[ind].anio, " ");
+    strcpy(Datos[ind].info_estante.estante_numero, " ");
+    strcpy(Datos[ind].info_estante.estante_seccion, " ");
+    strcpy(Datos[ind].info_sede.piso, " ");
+    strcpy(Datos[ind].info_sede.edificio, " ");
+    strcpy(Datos[ind].info_sede.sede, " ");
+    p("...\n");
+    p("Libro eliminado.\n");
+  } else {
+    p("No se encuentra el libro.\n");
+  }
 }
 
 void AnadirSede(nuevos_datos NuevosDatos[], int cont) {
   char nuevasede[200];
 
+  p("\e[1;1H\e[2J");
   p("Ingresa la sede que desea anadir: \n");
   fflush(stdout);
-  scanf(" %[^\n]", nuevasede);
+  s(" %[^\n]", nuevasede);
   strcpy(NuevosDatos[cont].sede, nuevasede);
-  printf("La sede %s ", nuevasede);
+  p("La sede %s ", nuevasede);
+  p("ha sido agregada.\n");
+  fflush(stdout);
+}
+
+void QuitarSede(libros Datos[], nuevos_datos NuevosDatos[], int j) {
+  int i, ind;
+  int found = 0;
+  int foundnuevo = 0;
+  char nuevasede[200];
+
+  p("\e[1;1H\e[2J");
+  p("Ingresa la sede que desea quitar: \n");
+  fflush(stdout);
+  scanf(" %[^\n]", nuevasede);
+
+  for (i = 0; i <= j; ++i) {
+    if (strcmp(nuevasede, Datos[i].info_sede.sede) == 0) {
+      ind = i;
+      found = 1;
+    }
+  }
+
+  for (i = 0; i <= 100; ++i) {
+    if (strcmp(nuevasede, NuevosDatos[i].sede) == 0) {
+      ind = i;
+      foundnuevo = 1;
+    }
+  }
+
+  if (found == 1) {
+    printf("La sede tiene un libro asociado.\n");
+    foundnuevo = 0;
+  }
+
+  if (foundnuevo == 1) {
+    strcpy(NuevosDatos[ind].sede, "\0");
+    printf("La sede %s ", nuevasede);
+    printf("ha sido eliminada.\n");
+    fflush(stdout);
+  }
+}
+
+void AnadirPiso(nuevos_datos NuevosDatos[], int cont) {
+  char nuevapiso[200];
+
+  p("\e[1;1H\e[2J");
+  p("Ingresa el piso que desea anadir: \n");
+  fflush(stdout);
+  scanf(" %[^\n]", nuevapiso);
+  strcpy(NuevosDatos[cont].piso, nuevapiso);
+  printf("El piso %s ", nuevapiso);
+  printf("ha sido agregado.\n");
+  fflush(stdout);
+}
+
+void QuitarPiso(libros Datos[], nuevos_datos NuevosDatos[], int j) {
+  int i, ind;
+  int found = 0;
+  int foundnuevo = 0;
+  char nuevapiso[200];
+
+  p("\e[1;1H\e[2J");
+  p("Ingresa el piso que desea quitar: \n");
+  fflush(stdout);
+  scanf(" %[^\n]", nuevapiso);
+
+  for (i = 0; i <= j; ++i) {
+    if (strcmp(nuevapiso, Datos[i].info_sede.piso) == 0) {
+      ind = i;
+      found = 1;
+    }
+  }
+
+  for (i = 0; i <= 100; ++i) {
+    if (strcmp(nuevapiso, NuevosDatos[i].piso) == 0) {
+      ind = i;
+      foundnuevo = 1;
+    }
+  }
+
+  if (found == 1) {
+    printf("El piso tiene un libro asociado.\n");
+    foundnuevo = 0;
+  }
+
+  if (foundnuevo == 1) {
+    strcpy(NuevosDatos[ind].piso, "\0");
+    printf("El piso %s ", nuevapiso);
+    printf("ha sido eliminado.\n");
+    fflush(stdout);
+  }
+}
+
+void AnadirSec(nuevos_datos NuevosDatos[], int cont) {
+  char nuevasec[200];
+
+  p("\e[1;1H\e[2J");
+  p("Ingresa la seccion que desea anadir: \n");
+  fflush(stdout);
+  scanf(" %[^\n]", nuevasec);
+  strcpy(NuevosDatos[cont].sec, nuevasec);
+  printf("La seccion %s ", nuevasec);
   printf("ha sido agregada.\n");
   fflush(stdout);
+}
+
+void QuitarSec(libros Datos[], nuevos_datos NuevosDatos[], int j) {
+  int i, ind;
+  int found = 0;
+  int foundnuevo = 0;
+  char nuevasec[200];
+
+  p("\e[1;1H\e[2J");
+  p("Ingresa la sec que desea quitar: \n");
+  fflush(stdout);
+  scanf(" %[^\n]", nuevasec);
+
+  for (i = 0; i <= j; ++i) {
+    if (strcmp(nuevasec, Datos[i].info_estante.estante_seccion) == 0) {
+      ind = i;
+      found = 1;
+    }
+  }
+
+  for (i = 0; i <= 100; ++i) {
+    if (strcmp(nuevasec, NuevosDatos[i].sec) == 0) {
+      ind = i;
+      foundnuevo = 1;
+    }
+  }
+
+  if (found == 1) {
+    printf("La seccion tiene un libro asociado.\n");
+    foundnuevo = 0;
+  }
+
+  if (foundnuevo == 1) {
+    strcpy(NuevosDatos[ind].sec, "\0");
+    printf("La seccion %s ", nuevasec);
+    printf("ha sido eliminada.\n");
+    fflush(stdout);
+  }
+}
+
+void Guardar(libros Datos[], int j, char *archivo_csv) {
+  int x;
+
+  FILE *notas2 = fopen(archivo_csv, "w+");
+
+  fprintf(notas2,
+          "titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,"
+          "sede\n");
+
+  for (x = 0; x < j; ++x) {
+    if (strcmp(Datos[x].titulo, "del") == 0) {
+      continue;
+    }
+
+    if (x < j - 1) {
+      fprintf(notas2, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+              "\"", Datos[x].titulo, "\"", ",", "\"", Datos[x].autor, "\"", ",",
+              Datos[x].anio, ",", Datos[x].info_estante.estante_numero, ",",
+              "\"", Datos[x].info_estante.estante_seccion, "\"", ",",
+              Datos[x].info_sede.piso, ",", "\"", Datos[x].info_sede.edificio,
+              "\"", ",", "\"", Datos[x].info_sede.sede, "\"\n");
+    } else {
+      fprintf(notas2, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+              "\"", Datos[x].titulo, "\"", ",", "\"", Datos[x].autor, "\"", ",",
+              Datos[x].anio, ",", Datos[x].info_estante.estante_numero, ",",
+              "\"", Datos[x].info_estante.estante_seccion, "\"", ",",
+              Datos[x].info_sede.piso, ",", "\"", Datos[x].info_sede.edificio,
+              "\"", ",", "\"", Datos[x].info_sede.sede, "\"");
+    }
+  }
+
+  fclose(notas2);
 }
