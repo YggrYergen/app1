@@ -38,6 +38,8 @@ typedef struct nuevos_datos {
 void count_rows(int *a, FILE *input);
 void leer_csv(FILE *fp, libros *biblioteca);
 void llenarSedes(libros biblioteca[], nuevos_datos NuevosDatos[], int j);
+void llenarPisos(libros biblioteca[], nuevos_datos NuevosDatos[], int j);
+void llenarSecciones(libros biblioteca[], nuevos_datos NuevosDatos[], int j);
 void show_menu(libros biblioteca[], nuevos_datos NuevosDatos[],
                char *archivo_csv, int j);
 void opciones(int *cerrar, int *salir);

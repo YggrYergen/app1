@@ -8,7 +8,7 @@ void llenarSedes(libros biblioteca[], nuevos_datos NuevosDatos[], int j) {
       strcpy(NuevosDatos[i].sede, biblioteca[i].info_sede.sede);
       continue;
     }
-    for (int k = i; k = 0; k--) {
+    for (int k = i; k > 0; k--) {
       if (strcmp(biblioteca[i].info_sede.sede,
                  biblioteca[k - 1].info_sede.sede) == 0) {
         aux = 1;
@@ -17,12 +17,61 @@ void llenarSedes(libros biblioteca[], nuevos_datos NuevosDatos[], int j) {
     }
     if (aux == 0) {
       contador++;
-      strcpy(NuevosDatos[contador].sede, biblioteca[contador].info_sede.sede);
+      strcpy(NuevosDatos[contador].sede, biblioteca[i].info_sede.sede);
+    }
+  }
+  for (int i = 0; i <= contador; i++)
+    printf("sede %d: %s\n", i + 1, NuevosDatos[i].sede);
+}
+
+void llenarPisos(libros biblioteca[], nuevos_datos NuevosDatos[], int j) {
+  int contador = 0;
+  for (int i = 0; i < j; i++) {
+    int aux = 0;
+    if (i == 0) {
+      strcpy(NuevosDatos[i].piso, biblioteca[i].info_sede.piso);
+      continue;
+    }
+    for (int k = i; k > 0; k--) {
+      if (strcmp(biblioteca[i].info_sede.piso,
+                 biblioteca[k - 1].info_sede.piso) == 0) {
+        aux = 1;
+        continue;
+      }
+    }
+    if (aux == 0) {
+      contador++;
+      strcpy(NuevosDatos[contador].piso, biblioteca[i].info_sede.piso);
+    }
+  }
+  for (int i = 0; i <= contador; i++)
+    printf("piso %d: %s\n", i + 1, NuevosDatos[i].piso);
+}
+
+void llenarSecciones(libros biblioteca[], nuevos_datos NuevosDatos[], int j) {
+  int contador = 0;
+  for (int i = 0; i < j; i++) {
+    int aux = 0;
+    if (i == 0) {
+      strcpy(NuevosDatos[i].sec, biblioteca[i].info_estante.estante_seccion);
+      continue;
+    }
+    for (int k = i; k > 0; k--) {
+      if (strcmp(biblioteca[i].info_estante.estante_seccion,
+                 biblioteca[k - 1].info_estante.estante_seccion) == 0) {
+        aux = 1;
+        continue;
+      }
+    }
+    if (aux == 0) {
+      contador++;
+      strcpy(NuevosDatos[contador].sec,
+             biblioteca[i].info_estante.estante_seccion);
     }
   }
 
   for (int i = 0; i <= contador; i++)
-    printf("sede %d: %s\n", i + 1, NuevosDatos[i].sede);
+    printf("seccion %d: %s\n", i + 1, NuevosDatos[i].sec);
 }
 
 void opciones(int *cerrar, int *salir) {
